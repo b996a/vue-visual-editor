@@ -1,26 +1,44 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="app">
+    <Editor v-model="state"></Editor>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import data from '@/data.json'
+import { ref, provide } from 'vue'
+import Editor from '@/packages/editor'
+import { registerConfig as config } from '@/utils/editor-config.jsx'
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Editor
+  },
+  setup() {
+    const state = ref(JSON.parse(localStorage.getItem('data')) || data)
+    // console.log(config)
+    provide('config', config) //把config提供出去
+    const formDate = ref({
+      username: 'admin',
+      passward: 123456,
+      text: '666',
+      start: 0,
+      end: 100
+    })
+    provide('formDate', formDate)
+    return {
+      state
+    }
   }
 }
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.app {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
 }
 </style>
