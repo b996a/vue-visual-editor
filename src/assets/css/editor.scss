@@ -46,7 +46,7 @@
         background-color: #fff;
         opacity: 0.1;
       }
-      &:hover{
+      &:hover {
         border-color: #53a8ff;
       }
     }
@@ -64,7 +64,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow:0px 3px 3px #ccc;
+    box-shadow: 0px 3px 3px #ccc;
     &-button {
       display: flex;
       align-items: center;
@@ -79,18 +79,20 @@
       & + & {
         margin-left: 8px;
       }
-    };
-    &-logo{
+    }
+    &-logo {
       position: absolute;
       left: 10px;
     }
-    &-rightImg1{
+    &-rightImg1 {
       position: absolute;
       right: 60px;
+      cursor: pointer;
     }
-    &-rightImg2{
+    &-rightImg2 {
       position: absolute;
       right: 10px;
+      cursor: pointer;
     }
   }
 
@@ -244,9 +246,9 @@
 }
 
 //左右区域标题
-.topTitle{
+.topTitle {
   box-sizing: border-box;
-  box-shadow:0px 1px 0px #ccc;
+  box-shadow: 0px 1px 0px #ccc;
   width: 270px;
   height: 40px;
   line-height: 40px;
@@ -257,13 +259,13 @@
   color: #409eff;
 }
 //动画组件样式
-.animate{
+.animate {
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
 }
-.animateItem{
+.animateItem {
   width: 45%;
   height: 50px;
   margin-top: 5px;
@@ -272,20 +274,20 @@
   border: 2px solid #409eff;
   position: relative;
   cursor: pointer;
-  > p{
+  > p {
     color: #409eff;
     position: absolute;
     width: 80%;
     top: 50%;
     left: 50%;
-    transform:translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     font-size: 16px;
     margin: 0;
-    word-wrap:break-word;
-    word-break:break-all;
+    word-wrap: break-word;
+    word-break: break-all;
   }
-  &:hover{
-    > p{
+  &:hover {
+    > p {
       color: #fff;
     }
     background: #409eff;

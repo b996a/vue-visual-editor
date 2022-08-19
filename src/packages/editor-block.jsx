@@ -49,16 +49,16 @@ export default defineComponent({
           return prev
         }, {})
       })
-      const animate = computed(()=>{
-        if(props.block.animate.name == undefined){
-          return ' '
-        }else{
-          return  `animate__animated ${props.block.animate.name} ${props.block.animate.duration} animate__delay-${props.block.animate.delay}s`
+      const animate = computed(() => {
+        if ('name' in props.block.animate === false) {
+          return 'editor-block'
+        } else {
+          return `editor-block animate__animated ${props.block.animate.name} ${props.block.animate.duration} animate__delay-${props.block.animate.delay}s`
         }
       })
       const { width, height } = component.resize || {}
       return (
-        <div class="editor-block" class={animate.value} data-name={props.block.name} style={blockStyles.value} ref={blockRef}>
+        <div class={animate.value} data-name={props.block.name} style={blockStyles.value} ref={blockRef}>
           {RenderComponent}
           {/* 有选中，且配置项中有width和height设置，显示BlockResize元素 */}
           {props.block.focus && (width || height) && <BlockResize block={props.block} component={component}></BlockResize>}
