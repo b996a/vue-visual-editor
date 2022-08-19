@@ -16,7 +16,6 @@ export default {
   },
   setup() {
     const state = ref(JSON.parse(localStorage.getItem('data')) || data)
-    // console.log(config)
     provide('config', config) //把config提供出去
     const formDate = ref({
       username: 'admin',

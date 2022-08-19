@@ -54,6 +54,27 @@ export default defineComponent({
             <ElFormItem label="容器高度">
               <ElInputNumber v-model={state.editData.height}></ElInputNumber>
             </ElFormItem>
+            <ElFormItem label="背景颜色">
+              <ElColorPicker v-model={state.editData.backgroundColor}></ElColorPicker>
+            </ElFormItem>
+            <ElFormItem label="背景图片">
+              <ElInput placeholder="输入图片url" v-model={state.editData.backgroundImage}></ElInput>
+            </ElFormItem>
+            <ElFormItem label="背景图片大小">
+              <ElSelect  v-model={state.editData.backgroundSize}>
+                  <ElOption label="默认" value="auto"></ElOption>
+                  <ElOption label="缩放完全覆盖" value="cover"></ElOption>
+                  <ElOption label="缩放适应大小" value="contain"></ElOption>
+              </ElSelect>
+            </ElFormItem>
+            <ElFormItem label="背景图片平铺样式">
+              <ElSelect placeholder="背景图片平铺样式" v-model={state.editData.backgroundRepeat}>
+                <ElOption label="默认" value="repeat"></ElOption>
+                <ElOption label="水平重复" value="repeat-x"></ElOption>
+                <ElOption label="垂直重复" value="repeat-y"></ElOption>
+                <ElOption label="不重复" value="no-repeat"></ElOption>
+              </ElSelect>
+            </ElFormItem>
           </>
         )
       } else {

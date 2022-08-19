@@ -1,5 +1,6 @@
 import { computed, defineComponent, inject, onMounted, ref } from 'vue'
 import BlockResize from './block-resize'
+import 'animate.css'
 
 export default defineComponent({
   props: {
@@ -36,6 +37,7 @@ export default defineComponent({
         // 发生大小改变就将hasResize置为true,改变对应的元素大小
         size: props.block.hasResize ? { width: props.block.width, height: props.block.height } : {},
         props: props.block.props,
+        animate: props.block.animate,
         model: Object.keys(component.model || {}).reduce((prev, modelName) => {
           // 拿到default对应的字段 username
           let propName = props.block.model[modelName]
@@ -47,9 +49,16 @@ export default defineComponent({
           return prev
         }, {})
       })
+      const animate = computed(()=>{
+        if(props.block.animate.name == undefined){
+          return ' '
+        }else{
+          return  `animate__animated ${props.block.animate.name} ${props.block.animate.duration} animate__delay-${props.block.animate.delay}s`
+        }
+      })
       const { width, height } = component.resize || {}
       return (
-        <div class="editor-block" data-name={props.block.name} style={blockStyles.value} ref={blockRef}>
+        <div class="editor-block" class={animate.value} data-name={props.block.name} style={blockStyles.value} ref={blockRef}>
           {RenderComponent}
           {/* 有选中，且配置项中有width和height设置，显示BlockResize元素 */}
           {props.block.focus && (width || height) && <BlockResize block={props.block} component={component}></BlockResize>}
