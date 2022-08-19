@@ -1,7 +1,7 @@
 // 列表区可以显示所有的元素
-
 import { ElButton, ElInput, ElOption, ElSelect } from 'element-plus'
 import Range from '@/components/Range.jsx'
+import 'animate.css'
 // key对应的元素的映射关系
 function createEditorConfig() {
   // 元素表
@@ -29,6 +29,7 @@ registerConfig.register({
   preview: () => <span>预览文本</span>,
   render: ({ props }) => <span style={{ color: props.color, fontSize: props.fontSize }}>{props.text || '默认文本'}</span>,
   key: 'text',
+  animate:{},
   props: {
     text: createInputProp('文本内容'),
     color: createColorProp('字体颜色'),
@@ -52,6 +53,7 @@ registerConfig.register({
     </ElButton>
   ),
   key: 'button',
+  animate:{},
   props: {
     text: createInputProp('文本内容'),
     type: createSelectProp('按钮类型', [
@@ -76,6 +78,7 @@ registerConfig.register({
   preview: () => <ElInput placeholder="预览"></ElInput>,
   render: ({ size, props, model }) => <ElInput style={{ width: size.width + 'px' }} placeholder={props.placeholder} type={props.type} {...model.default}></ElInput>,
   key: 'input',
+  animate:{},
   model: {
     default: '绑定字段'
   },
@@ -102,6 +105,7 @@ registerConfig.register({
     )
   },
   key: 'select',
+  animate:{},
   model: {
     default: '绑定字段'
   },
@@ -133,5 +137,6 @@ registerConfig.register({
     start: '开始范围字段',
     end: '结束范围字段'
   },
-  props: {}
+  props: {},
+  animate:{}
 })

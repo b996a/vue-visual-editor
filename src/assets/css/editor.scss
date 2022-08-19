@@ -6,22 +6,14 @@
   &-right {
     position: absolute;
     width: 270px;
-    top: 0;
+    top: 90px;
     bottom: 0;
+    // background-color: red;
+    overflow-y: scroll;
+    overflow-x: hidden;
   }
   &-left {
     left: 0;
-    &-title {
-      box-sizing: border-box;
-      width: 100px;
-      height: 40px;
-      line-height: 40px;
-      margin: 20px 75px;
-      font-size: 28px;
-      text-align: center;
-      background-color: skyblue;
-      color: #fff;
-    }
     &-item {
       position: relative;
       box-sizing: border-box;
@@ -33,15 +25,16 @@
       margin: 20px auto;
       padding: 20px;
       background-color: #fff;
+      border: 3px solid #f5f5f5;
       cursor: move;
       user-select: none;
       > span {
         position: absolute;
         top: 0;
-        left: 0;
-        padding: 4px;
+        left: -1px;
+        padding: 3px;
         color: #fff;
-        background-color: skyblue;
+        background-color: #409eff;
       }
       &::after {
         content: '';
@@ -50,34 +43,28 @@
         left: 0;
         bottom: 0;
         right: 0;
-        background-color: #ccc;
-        opacity: 0.2;
+        background-color: #fff;
+        opacity: 0.1;
+      }
+      &:hover{
+        border-color: #53a8ff;
       }
     }
   }
   &-right {
     right: 0;
-    &-title {
-      box-sizing: border-box;
-      width: 130px;
-      height: 40px;
-      line-height: 40px;
-      margin: 20px 75px;
-      font-size: 28px;
-      text-align: center;
-      background-color: skyblue;
-      color: #fff;
-    }
   }
 
   &-top {
-    position: absolute;
-    left: 280px;
-    right: 280px;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    right: 0;
     height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow:0px 3px 3px #ccc;
     &-button {
       display: flex;
       align-items: center;
@@ -85,27 +72,41 @@
       flex-direction: column;
       width: 60px;
       height: 60px;
-      background-color: skyblue;
-      color: #fff;
+      background-color: #fff;
+      color: #000000;
       user-select: none;
       cursor: pointer;
       & + & {
         margin-left: 8px;
       }
+    };
+    &-logo{
+      position: absolute;
+      left: 10px;
+    }
+    &-rightImg1{
+      position: absolute;
+      right: 60px;
+    }
+    &-rightImg2{
+      position: absolute;
+      right: 10px;
     }
   }
 
   &-container {
     box-sizing: border-box;
-    padding: 80px 270px 0;
+    padding: 90px 290px 0;
     height: 100%;
     &-canvas {
       overflow: scroll;
+      padding: 10px;
       height: 100%;
       &__content {
         position: relative;
+        box-shadow: #666 0 0 0.1rem;
         margin: 0 auto;
-        background-color: rgba(0, 0, 0, 0.3);
+        background-color: #fff;
       }
     }
   }
@@ -138,7 +139,7 @@
 .selected-box {
   display: none;
   position: absolute;
-  border: 1px dashed red;
+  border: 2px dashed red;
 }
 
 //line
@@ -146,13 +147,13 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  border-left: 1px dashed red;
+  border-left: 2px dashed red;
 }
 .line-y {
   position: absolute;
   left: 0;
   right: 0;
-  border-top: 1px dashed red;
+  border-top: 2px dashed red;
 }
 
 //dropdown
@@ -239,5 +240,54 @@
   &-right {
     right: -2px;
     top: calc(50% - 2px);
+  }
+}
+
+//左右区域标题
+.topTitle{
+  box-sizing: border-box;
+  box-shadow:0px 1px 0px #ccc;
+  width: 270px;
+  height: 40px;
+  line-height: 40px;
+  margin: auto;
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+  color: #409eff;
+}
+//动画组件样式
+.animate{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.animateItem{
+  width: 45%;
+  height: 50px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  text-align: center;
+  border: 2px solid #409eff;
+  position: relative;
+  cursor: pointer;
+  > p{
+    color: #409eff;
+    position: absolute;
+    width: 80%;
+    top: 50%;
+    left: 50%;
+    transform:translate(-50%,-50%);
+    font-size: 16px;
+    margin: 0;
+    word-wrap:break-word;
+    word-break:break-all;
+  }
+  &:hover{
+    > p{
+      color: #fff;
+    }
+    background: #409eff;
   }
 }

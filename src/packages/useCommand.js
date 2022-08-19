@@ -29,10 +29,8 @@ export function useCommand(data, focusData) {
       }
       queue.push({ redo, undo }) //保存指令的前进后退
       state.current++ //执行命令后current+1
-      console.log(queue)
     }
   }
-  console.log(state)
   // 注册命令
   // 前进命令
   registry({
