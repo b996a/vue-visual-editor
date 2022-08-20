@@ -228,8 +228,8 @@ registerConfig.register({
       { label: '大型', value: 'large' }
     ]),
     showInput: createSelectProp('显示滑块输入框', [
-      { label: '显示', value: 'true' },
-      { label: '不显示', value: 'false' }
+      { label: '显示', value: true },
+      { label: '不显示', value: false }
     ]),
     placement: createSelectProp('数值提示位置', [
       { label: '上', value: 'top' },
@@ -254,12 +254,12 @@ registerConfig.register({
       { label: '失败', value: 'exception' }
     ]),
     textInside: createSelectProp('进度显示', [
-      { label: '显示', value: 'true' },
-      { label: '不显示', value: 'false' }
+      { label: '显示', value: true },
+      { label: '不显示', value: false }
     ]),
     indeterminate: createSelectProp('进度动画', [
-      { label: '显示', value: 'true' },
-      { label: '不显示', value: 'false' }
+      { label: '显示', value: true },
+      { label: '不显示', value: false }
     ]),
     width: createPercentageProp('宽度'),
     duration: createPercentageProp('进度动画时长'),
