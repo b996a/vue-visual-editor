@@ -12,6 +12,9 @@ export default defineComponent({
     const apply = ()=>{
       props.lastSelectBlock.animate = animate.value
     }
+    const reset = ()=>{
+      props.lastSelectBlock.animate = {}
+    }
     return ()=>{
       return (
         <div>
@@ -39,6 +42,9 @@ export default defineComponent({
           <ElFormItem>
             <ElButton type="primary" onclick={() => apply()}>
               应用
+            </ElButton>
+            <ElButton  onclick={() => reset()}>
+              重置
             </ElButton>
           </ElFormItem>
         </div>
