@@ -22,7 +22,8 @@ export default {
       passward: 123456,
       text: '666',
       start: 0,
-      end: 100
+      end: 100,
+      silde:0
     })
     provide('formDate', formDate)
     return {

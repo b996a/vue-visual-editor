@@ -61,10 +61,10 @@ export default defineComponent({
               <ElInput placeholder="输入图片url" v-model={state.editData.backgroundImage}></ElInput>
             </ElFormItem>
             <ElFormItem label="背景图片大小">
-              <ElSelect  v-model={state.editData.backgroundSize}>
-                  <ElOption label="默认" value="auto"></ElOption>
-                  <ElOption label="缩放完全覆盖" value="cover"></ElOption>
-                  <ElOption label="缩放适应大小" value="contain"></ElOption>
+              <ElSelect v-model={state.editData.backgroundSize}>
+                <ElOption label="默认" value="auto"></ElOption>
+                <ElOption label="缩放完全覆盖" value="cover"></ElOption>
+                <ElOption label="缩放适应大小" value="contain"></ElOption>
               </ElSelect>
             </ElFormItem>
             <ElFormItem label="背景图片平铺样式">
