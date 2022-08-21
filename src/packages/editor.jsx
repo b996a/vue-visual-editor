@@ -140,6 +140,9 @@ export default defineComponent({
               <ElMenuItem disabled={lastSelectBlock.value == undefined ? true : false} index="2">
                 动画
               </ElMenuItem>
+              <ElMenuItem disabled={lastSelectBlock.value == undefined ? true : false} index="3">
+                事件
+              </ElMenuItem>
             </ElMenu>
             <EditorRight rightActiveIndex={rightActiveIndex} commands={commands} data={data} lastSelectBlock={lastSelectBlock.value}></EditorRight>
           </div>
