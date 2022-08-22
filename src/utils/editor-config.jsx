@@ -1,5 +1,5 @@
 // 列表区可以显示所有的元素
-import { ElButton, ElInput, ElOption, ElSelect, ElDatePicker, ElRadio, ElSlider, ElProgress } from 'element-plus'
+import { ElButton, ElInput, ElOption, ElSelect, ElDatePicker, ElRadio, ElSlider, ElProgress, ElInputNumber, ElCarousel, ElCarouselItem } from 'element-plus'
 import 'element-plus'
 import Range from '@/components/Range.jsx'
 import 'animate.css'
@@ -211,6 +211,38 @@ registerConfig.register({
   }
 })
 registerConfig.register({
+  label: '多选框',
+  preview: () => <ElCheckboxGroup><ElCheckbox label="预览1"></ElCheckbox><ElRadio label="预览2"></ElRadio></ElCheckboxGroup>,
+  render: ({ props, model }) => {
+    return (
+      <ElCheckboxGroup {...model.default} size={props.size} >
+        {(props.options || [{label:1,value:"预览1"},{label:2,value:"预览2"}]).map((item, index) => {
+          return <ElCheckbox disable={props.disable} label={item.label}>{item.value}</ElCheckbox>
+        })}
+      </ElCheckboxGroup>
+    )
+  },
+  key: 'checkbox',
+  model: {
+    default: '绑定字段'
+  },
+  disable:'disable',
+  props: {
+    options: createTableProp('多选选项', {
+      options: [
+        { label: '显示值', field: 'label' },
+		    { label: '绑定值', field: 'value' }
+      ],
+	    key: 'label'
+    }),
+	  size: createSelectProp('多选框尺寸', [
+	  	{ label: '小型', value: 'small' },
+	    { label: '默认', value: 'default' },
+	    { label: '大型', value: 'large' }
+	  ])
+  }
+})
+registerConfig.register({
   label: '滑块',
   preview: () => <ElSlider placeholder="预览"></ElSlider>,
   render: ({ props, model }) => {
@@ -264,5 +296,41 @@ registerConfig.register({
     width: createPercentageProp('宽度'),
     duration: createPercentageProp('进度动画时长'),
     percentage: createPercentageProp('进度条进度')
+  }
+})
+
+
+registerConfig.register({
+  label: '链接',
+  preview: () => <ElLink>预览按钮</ElLink>,
+  render: ({ size, props }) => (
+    <ElLink style={{ color: props.color, fontSize: props.fontSize}} href={props.hrefContent} type={props.type} size={props.size}
+     underline={props.linkUnderline}>
+      {props.text || '默认效果'}
+    </ElLink>
+  ),
+  key: 'link',
+  animate:{},
+  props: {
+    hrefContent: createInputProp('链接地址'),
+    text: createInputProp('显示内容'),
+    color: createColorProp('字体颜色'),
+    type: createSelectProp('链接类型',[
+      { label: '默认链接', value: 'href' },
+      { label: '主要链接', value: 'primary' },
+      { label: '成功链接', value: 'success' },
+      { label: '警告链接', value: 'warning' },
+      { label: '危险链接', value: 'danger' },
+      { label: '信息链接', value: 'info' },
+    ]),
+  fontSize: createSelectProp('字体大小', [
+      { label: '14px', value: '14px' },
+      { label: '18px', value: '18px' },
+      { label: '22px', value: '22px' }
+    ]),
+    linkUnderline:createSelectProp('下划线',[
+      { label: '有', value: true },
+      { label: '无', value: false }
+    ])
   }
 })
