@@ -1,9 +1,7 @@
 // 列表区可以显示所有的元素
-import { ElButton, ElInput, ElOption, ElSelect, ElDatePicker, ElRadio, ElSlider, ElProgress } from 'element-plus'
-import 'element-plus'
+import { ElButton, ElInput, ElOption, ElSelect, ElDatePicker, ElRadio, ElSlider, ElProgress, ElInputNumber, ElCheckboxGroup, ElRadioGroup, ElCheckbox, ElLink } from 'element-plus'
 import Range from '@/components/Range.jsx'
 import 'animate.css'
-import { ElRadioGroup } from 'element-plus'
 // key对应的元素的映射关系
 function createEditorConfig() {
   // 元素表
@@ -214,7 +212,7 @@ registerConfig.register({
   label: '滑块',
   preview: () => <ElSlider placeholder="预览"></ElSlider>,
   render: ({ props, model }) => {
-    return <ElSlider {...model.default} size={props.size} show-input={props.showInput} placement={props.placement} step={props.step} style={{ width: (props.width || '200') + 'px' }}></ElSlider>
+    return <ElSlider {...model.default} size={props.size} show-input={props.showInput} placement={props.placement} step={Number(props.step)} style={{ width: (props.width || '200') + 'px' }}></ElSlider>
   },
   key: 'slider',
   animate: {},
@@ -266,3 +264,138 @@ registerConfig.register({
     percentage: createPercentageProp('进度条进度')
   }
 })
+registerConfig.register({
+  label: '步进器',
+  preview: () => <ElInputNumber modelValue={1} controls={false}></ElInputNumber>,
+  //   key: 'inputNumber'
+  render: ({ props }) => <ElInputNumber size={props.size || 'default'} modelValue={Number(props.default) || 1} min={props.min || -Infinity} max={props.max || Infinity} step={props.step || 1} controls={true}></ElInputNumber>,
+  key: 'inputNumber',
+  props: {
+    size: createSelectProp('步进器尺寸', [
+      { label: '小型', value: 'small' },
+      { label: '默认', value: 'default' },
+      { label: '大型', value: 'large' }
+    ]),
+    default: createInputProp('输入默认值'),
+    min: createInputProp('输入最小值'),
+    max: createInputProp('输入最大值'),
+    step: createInputProp('输入步长')
+  }
+})
+registerConfig.register({
+  label: '多选框',
+  preview: () => (
+    <ElCheckboxGroup>
+      <ElCheckbox label="预览1"></ElCheckbox>
+      <ElRadio label="预览2"></ElRadio>
+    </ElCheckboxGroup>
+  ),
+  render: ({ props, model }) => {
+    return (
+      <ElCheckboxGroup {...model.default} size={props.size}>
+        {(
+          props.options || [
+            { label: 1, value: '预览1' },
+            { label: 2, value: '预览2' }
+          ]
+        ).map((item, index) => {
+          return (
+            <ElCheckbox disable={props.disable} label={item.label}>
+              {item.value}
+            </ElCheckbox>
+          )
+        })}
+      </ElCheckboxGroup>
+    )
+  },
+  key: 'checkbox',
+  model: {
+    default: '绑定字段'
+  },
+  disable: 'disable',
+  props: {
+    options: createTableProp('多选选项', {
+      options: [
+        { label: '显示值', field: 'label' },
+        { label: '绑定值', field: 'value' }
+      ],
+      key: 'label'
+    }),
+    size: createSelectProp('多选框尺寸', [
+      { label: '小型', value: 'small' },
+      { label: '默认', value: 'default' },
+      { label: '大型', value: 'large' }
+    ])
+  }
+})
+registerConfig.register({
+  label: '链接',
+  preview: () => <ElLink>预览按钮</ElLink>,
+  render: ({ size, props }) => (
+    <ElLink style={{ color: props.color, fontSize: props.fontSize }} href={props.hrefContent} type={props.type} size={props.size} underline={props.linkUnderline}>
+      {props.text || '默认效果'}
+    </ElLink>
+  ),
+  key: 'link',
+  animate: {},
+  props: {
+    hrefContent: createInputProp('链接地址'),
+    text: createInputProp('显示内容'),
+    color: createColorProp('字体颜色'),
+    type: createSelectProp('链接类型', [
+      { label: '默认链接', value: 'href' },
+      { label: '主要链接', value: 'primary' },
+      { label: '成功链接', value: 'success' },
+      { label: '警告链接', value: 'warning' },
+      { label: '危险链接', value: 'danger' },
+      { label: '信息链接', value: 'info' }
+    ]),
+    fontSize: createSelectProp('字体大小', [
+      { label: '14px', value: '14px' },
+      { label: '18px', value: '18px' },
+      { label: '22px', value: '22px' }
+    ]),
+    linkUnderline: createSelectProp('下划线', [
+      { label: '有', value: true },
+      { label: '无', value: false }
+    ])
+  }
+})
+// registerConfig.register({
+//   label: '轮播图',
+//   preview: () => (
+//     <ElCarousel>
+//       <ElCarouselItem height="10vw">
+//         <img style="width: 100%;height: 10vw" src="require('../assets/test.webp')" />
+//       </ElCarouselItem>
+//     </ElCarousel>
+//   ),
+//   key: 'carousel',
+//   render: ({ props }) => (
+//     <ElCarousel interval={4000}>
+//       <ElCarouselItem height={props.height || 200}>
+//         <img style="width: 100%" src={'../assets/test.webp'} />
+//       </ElCarouselItem>
+//       {/* <ElCarouselItem height={props.height || 200}>
+//         <img style="width: 100%" src={'../assets/test.webp'} />
+//       </ElCarouselItem>
+//       <ElCarouselItem height={props.height || 200}>
+//         <img style="width: 100%" src={'../assets/test.webp'} />
+//       </ElCarouselItem> */}
+//       {/* <ElCarouselItem height={props.height}>
+//           <img style="width: 100%"
+//       src={require('../assets/test.webp')} />
+//     </ElCarouselItem>
+//     <ElCarouselItem height={props.height}>
+//           <img style="width: 100%"
+//       src={require('./2.jpg')} />
+//     </ElCarouselItem> */}
+//     </ElCarousel>
+//   ),
+
+//   props: {
+//     height: createInputProp('输入高度'),
+//     initialIndex: createInputProp('初始状态激活的幻灯片的索引，从 0 开始'),
+//     interval: createInputProp('输入时间间隔')
+//   }
+// })
