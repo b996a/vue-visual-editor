@@ -1,5 +1,5 @@
 // 列表区可以显示所有的元素
-import { ElButton, ElInput, ElOption, ElSelect, ElDatePicker, ElRadio, ElSlider, ElProgress } from 'element-plus'
+import { ElButton, ElInput, ElOption, ElSelect, ElDatePicker, ElRadio, ElSlider, ElProgress,  ElInputNumber, ElCarousel, ElCarouselItem } from 'element-plus'
 import 'element-plus'
 import Range from '@/components/Range.jsx'
 import 'animate.css'
@@ -266,3 +266,67 @@ registerConfig.register({
     percentage: createPercentageProp('进度条进度')
   }
 })
+// 从这开始是步进器
+registerConfig.register({
+  label: '步进器',
+  preview: () => <ElInputNumber modelValue={1} controls='false'></ElInputNumber>,
+//   key: 'inputNumber'
+  render: ({ props}) =>
+    <ElInputNumber size={props.size} modelValue={props.default} min={props.min} 
+    max={props.max} step={props.step} controls='true'></ElInputNumber>,
+  key: 'inputNumber',
+  props: {
+    size: createSelectProp('步进器尺寸', [
+      { label: '小型' , value: 'small' },
+      { label: '默认' , value: 'default' },
+      { label: '大型' , value: 'large' },
+    ]), 
+    default: createInputProp('输入默认值'),
+    min: createInputProp('输入最小值'),
+    max: createInputProp('输入最大值'),
+    step: createInputProp('输入步长')
+  }
+})
+
+registerConfig.register({
+  label: '轮播图',
+  preview: () => <ElCarousel>
+    <ElCarouselItem height="10vw" >
+      <img style="width: 100%;height: 10vw"
+      src="require('./2.jpg')" />
+    </ElCarouselItem>
+  </ElCarousel>,
+  key: 'carousel',
+  render: ({ props}) =>
+  <ElCarousel interval={4000}>
+    <ElCarouselItem height={props.height||200} >
+          <img style="width: 100%"
+      src={'2.jpg'}/>
+    </ElCarouselItem>
+    <ElCarouselItem height={props.height||200} >
+          <img style="width: 100%"
+      src={'./2.jpg'}  />
+
+    </ElCarouselItem>
+    <ElCarouselItem height={props.height||200} >
+          <img style="width: 100%"
+      src="./2.jpg"  />
+
+    </ElCarouselItem>
+    {/* <ElCarouselItem height={props.height}>
+          <img style="width: 100%"
+      src={require('./2.jpg')} />
+    </ElCarouselItem>
+    <ElCarouselItem height={props.height}>
+          <img style="width: 100%"
+      src={require('./2.jpg')} />
+    </ElCarouselItem> */}
+</ElCarousel>,
+
+  props: {
+    height: createInputProp('输入高度'),
+    initialIndex: createInputProp('初始状态激活的幻灯片的索引，从 0 开始'),
+    interval: createInputProp('输入时间间隔')
+  }
+})
+
