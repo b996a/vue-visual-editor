@@ -209,6 +209,52 @@ registerConfig.register({
   }
 })
 registerConfig.register({
+  label: '多选框',
+  preview: () => (
+    <ElCheckboxGroup>
+      <ElCheckbox label="预览1"></ElCheckbox>
+      <ElRadio label="预览2"></ElRadio>
+    </ElCheckboxGroup>
+  ),
+  render: ({ props, model }) => {
+    return (
+      <ElCheckboxGroup {...model.default} size={props.size}>
+        {(
+          props.options || [
+            { label: 1, value: '预览1' },
+            { label: 2, value: '预览2' }
+          ]
+        ).map((item, index) => {
+          return (
+            <ElCheckbox disable={props.disable} label={item.label}>
+              {item.value}
+            </ElCheckbox>
+          )
+        })}
+      </ElCheckboxGroup>
+    )
+  },
+  key: 'checkbox',
+  model: {
+    default: '绑定字段'
+  },
+  disable: 'disable',
+  props: {
+    options: createTableProp('多选选项', {
+      options: [
+        { label: '显示值', field: 'label' },
+        { label: '绑定值', field: 'value' }
+      ],
+      key: 'label'
+    }),
+    size: createSelectProp('多选框尺寸', [
+      { label: '小型', value: 'small' },
+      { label: '默认', value: 'default' },
+      { label: '大型', value: 'large' }
+    ])
+  }
+})
+registerConfig.register({
   label: '滑块',
   preview: () => <ElSlider placeholder="预览"></ElSlider>,
   render: ({ props, model }) => {
