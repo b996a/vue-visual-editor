@@ -68,7 +68,7 @@ export default defineComponent({
     return () =>
       !editorRef.value ? (
         <>
-          <div class="editor-container-canvas__content" style={containerStyles.value} style="margin:0" style="box-shadow:none;">
+          <div class={editorRef.value ? 'editor-container-canvas__content' : 'editor-container-canvas__content closeEditor'} style={containerStyles.value}>
             {/* 渲染对应的元素 */}
             {data.value.blocks.map((block, index) => (
               <EditorBlock class={'editor-block-preview'} block={block} formData={formDate}></EditorBlock>
@@ -168,6 +168,7 @@ export default defineComponent({
                       blockMousedown(e, block, index)
                     }}
                     onContextmenu={e => onContextMenuBlock(e, block, commands)}
+                    previewRef={previewRef}
                   ></EditorBlock>
                 ))}
                 {markLine.x !== null && <div class="line-x" style={{ left: markLine.x + 'px' }}></div>}

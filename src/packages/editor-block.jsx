@@ -5,7 +5,13 @@ import 'animate.css'
 export default defineComponent({
   props: {
     block: { type: Object },
-    formData: { type: Object }
+    formData: { type: Object },
+    previewRef: {
+      type: Object,
+      default: {
+        value: true
+      }
+    }
   },
   setup(props) {
     const blockStyles = computed(() => ({
@@ -58,18 +64,21 @@ export default defineComponent({
       })
       const { width, height } = component.resize || {}
       //获取定义的事件
-      const handleClick = ()=>{
-        props.block.events.map(event=>{
-          if(event.param != '' && event.key=="redirect"){
-            window.location.href = event.param
-          }
-          if(event.param != '' && event.key=="alert"){
-            alert(event.param)
+      const handleClick = () => {
+        props.block.events.map(event => {
+          if (props.previewRef.value) {
+            //只有预览状态可以执行事件
+            if (event.param != '' && event.key == 'redirect') {
+              window.location.href = event.param
+            }
+            if (event.param != '' && event.key == 'alert') {
+              alert(event.param)
+            }
           }
         })
       }
       return (
-        <div class={animate.value} data-name={props.block.name} style={blockStyles.value} ref={blockRef} onClick={handleClick} >
+        <div class={animate.value} data-name={props.block.name} style={blockStyles.value} ref={blockRef} onClick={handleClick}>
           {RenderComponent}
           {/* 有选中，且配置项中有width和height设置，显示BlockResize元素 */}
           {props.block.focus && (width || height) && <BlockResize block={props.block} component={component}></BlockResize>}

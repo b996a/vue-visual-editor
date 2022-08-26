@@ -72,8 +72,11 @@
       flex-direction: column;
       width: 60px;
       height: 60px;
+      border: 1px solid #eee;
+      border-radius: 10px;
+      box-shadow: 2px 2px 2px #ccc;
       background-color: #fff;
-      color: #000000;
+      color: #333;
       user-select: none;
       cursor: pointer;
       & + & {
@@ -245,13 +248,20 @@
     top: calc(50% - 2px);
   }
 }
+//关闭编辑状态样式
+.closeEditor {
+  margin: 0;
+  box-shadow: none;
+  border: 1px solid #ccc;
+}
 
 //左右区域标题
 .topTitle {
   box-sizing: border-box;
   box-shadow: 0px 1px 0px #ccc;
+  margin-bottom: 10px;
   width: 270px;
-  height: 40px;
+  height: 48px;
   line-height: 40px;
   margin: auto;
   font-size: 28px;
