@@ -1,5 +1,5 @@
 // 列表区可以显示所有的元素
-import { ElButton, ElInput, ElOption, ElSelect, ElDatePicker, ElRadio, ElSlider, ElProgress, ElInputNumber, ElCheckboxGroup, ElRadioGroup, ElCheckbox, ElLink } from 'element-plus'
+import { ElButton, ElInput, ElOption, ElSelect, ElDatePicker, ElRadio, ElSlider, ElProgress, ElInputNumber, ElCheckboxGroup, ElRadioGroup, ElCheckbox, ElLink, ElImage } from 'element-plus'
 import Range from '@/components/Range.jsx'
 import 'animate.css'
 // key对应的元素的映射关系
@@ -23,7 +23,6 @@ const createColorProp = label => ({ type: 'color', label })
 const createSelectProp = (label, options) => ({ type: 'select', label, options })
 const createTableProp = (label, table) => ({ type: 'table', label, table })
 const createPercentageProp = (label, value) => ({ type: 'input', label, value })
-
 // console.log(registerConfig)
 registerConfig.register({
   label: '文本',
@@ -31,6 +30,18 @@ registerConfig.register({
   render: ({ props }) => <span style={{ color: props.color, fontSize: props.fontSize }}>{props.text || '默认文本'}</span>,
   key: 'text',
   animate: {},
+  events:[
+    {
+        key: 'redirect',
+        label: '跳转事件',
+        param: '',
+    },
+    {
+        key: 'alert',
+        label: 'alert 事件',
+        param: '',
+    },
+  ],
   props: {
     text: createInputProp('文本内容'),
     color: createColorProp('字体颜色'),
@@ -55,6 +66,18 @@ registerConfig.register({
   ),
   key: 'button',
   animate: {},
+  events:[
+    {
+        key: 'redirect',
+        label: '跳转事件',
+        param: '',
+    },
+    {
+        key: 'alert',
+        label: 'alert 事件',
+        param: '',
+    },
+  ],
   props: {
     text: createInputProp('文本内容'),
     type: createSelectProp('按钮类型', [
@@ -80,6 +103,18 @@ registerConfig.register({
   render: ({ size, props, model }) => <ElInput style={{ width: size.width + 'px' }} placeholder={props.placeholder} type={props.type} {...model.default}></ElInput>,
   key: 'input',
   animate: {},
+  events:[
+    {
+        key: 'redirect',
+        label: '跳转事件',
+        param: '',
+    },
+    {
+        key: 'alert',
+        label: 'alert 事件',
+        param: '',
+    },
+  ],
   model: {
     default: '绑定字段'
   },
@@ -107,6 +142,18 @@ registerConfig.register({
   },
   key: 'select',
   animate: {},
+  events:[
+    {
+        key: 'redirect',
+        label: '跳转事件',
+        param: '',
+    },
+    {
+        key: 'alert',
+        label: 'alert 事件',
+        param: '',
+    },
+  ],
   model: {
     default: '绑定字段'
   },
@@ -139,7 +186,19 @@ registerConfig.register({
     end: '结束范围字段'
   },
   props: {},
-  animate: {}
+  animate: {},
+  events:[
+    {
+        key: 'redirect',
+        label: '跳转事件',
+        param: '',
+    },
+    {
+        key: 'alert',
+        label: 'alert 事件',
+        param: '',
+    },
+  ],
 })
 registerConfig.register({
   label: '日期选择器',
@@ -262,6 +321,18 @@ registerConfig.register({
   },
   key: 'slider',
   animate: {},
+  events:[
+    {
+        key: 'redirect',
+        label: '跳转事件',
+        param: '',
+    },
+    {
+        key: 'alert',
+        label: 'alert 事件',
+        param: '',
+    },
+  ],
   model: {
     default: '绑定字段'
   },
@@ -384,6 +455,18 @@ registerConfig.register({
   ),
   key: 'link',
   animate: {},
+  events:[
+    {
+        key: 'redirect',
+        label: '跳转事件',
+        param: '',
+    },
+    {
+        key: 'alert',
+        label: 'alert 事件',
+        param: '',
+    },
+  ],
   props: {
     hrefContent: createInputProp('链接地址'),
     text: createInputProp('显示内容'),
@@ -405,6 +488,37 @@ registerConfig.register({
       { label: '有', value: true },
       { label: '无', value: false }
     ])
+  }
+})
+//style={`width:${props.width}px;height:${props.height}px`}
+//props.url
+registerConfig.register({
+  label: '图片',
+  preview: () => <ElImage style="width:80px;height:80px" ></ElImage>,
+  render: ({props}) => {
+    return (
+      <img width={('width' in props) ? `${props.width}`:'80'} height={('height' in props) ? `${props.height}`:'80'} src={('url' in props) ? props.url : 'https://img0.baidu.com/it/u=2655940096,3422380782&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1661619600&t=d213f9e87e5caecb23cbc206d8678cc6'} >
+      </img>
+    )
+  },
+  key: 'image',
+  animate: {},
+  events:[
+    {
+        key: 'redirect',
+        label: '跳转事件',
+        param: '',
+    },
+    {
+        key: 'alert',
+        label: 'alert 事件',
+        param: '',
+    },
+  ],
+  props: {
+    width:createInputProp('宽'),
+    height:createInputProp('高'),
+    url:createInputProp('链接')
   }
 })
 // registerConfig.register({

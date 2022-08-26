@@ -1,4 +1,4 @@
-import { events } from './events.js'
+import { events } from './events'
 export function useMenuDragger(data, containerRef) {
   let currentComponent = null
   let num = 1
@@ -47,7 +47,19 @@ export function useMenuDragger(data, containerRef) {
           alignCenter: true,
           props: {},
           model: {},
-          animate:{}
+          animate:{},
+          events:[
+            {
+                key: 'redirect',
+                label: '跳转事件',
+                param: '',
+            },
+            {
+                key: 'alert',
+                label: 'alert 事件',
+                param: '',
+            },
+          ],
         }
       ]
     }

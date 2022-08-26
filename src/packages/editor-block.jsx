@@ -57,8 +57,19 @@ export default defineComponent({
         }
       })
       const { width, height } = component.resize || {}
+      //获取定义的事件
+      const handleClick = ()=>{
+        props.block.events.map(event=>{
+          if(event.param != '' && event.key=="redirect"){
+            window.location.href = event.param
+          }
+          if(event.param != '' && event.key=="alert"){
+            alert(event.param)
+          }
+        })
+      }
       return (
-        <div class={animate.value} data-name={props.block.name} style={blockStyles.value} ref={blockRef}>
+        <div class={animate.value} data-name={props.block.name} style={blockStyles.value} ref={blockRef} onClick={handleClick} >
           {RenderComponent}
           {/* 有选中，且配置项中有width和height设置，显示BlockResize元素 */}
           {props.block.focus && (width || height) && <BlockResize block={props.block} component={component}></BlockResize>}
