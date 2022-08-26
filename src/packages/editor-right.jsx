@@ -3,7 +3,9 @@ import EditorOperator from '@/packages/editor-operator'
 import { ElButton } from 'element-plus'
 import '@element-plus/icons-vue'
 import EditorAnimate from './editor-animate'
+import EditorEvent from './editor-event'
 import animates from './animates.json'
+import deepcopy from 'deepcopy'
 export default defineComponent({
   props: {
     rightActiveIndex: { type: Object },
@@ -16,9 +18,6 @@ export default defineComponent({
     const isShowAddButton = ref(false)
     //是否显示所有可用动画
     const isShowAllAnimate = ref(false)
-    // 是否显示所有事件
-    const isShowAllEvent = ref(false)
-    const isShowAllEvents = ref(false)
     //获取所有动画
     const animateObj = animates.animates.map(animate => {
       const label = animate.split('_')[2]
@@ -49,44 +48,7 @@ export default defineComponent({
       }
       isShowAddButton.value = false
       isShowAllAnimate.value = false
-      isShowAllEvent.value = false
-      isShowAllEvents.value = false
     }
-  // 编辑器自定义事件
-	const events = {
-    redirect(url) {
-        if (url) {
-            window.location.href = url
-        }
-    },
-
-    alert(msg) {
-        if (msg) {
-            // eslint-disable-next-line no-alert
-            alert(msg)
-        }
-    },
-}
-
-const mixins = {
-    methods: events,
-}
-//自定义事件
-const eventList = [
-    {
-        key: 'redirect',
-        label: '跳转事件',
-        event: events.redirect,
-        param: '',
-    },
-    {
-        key: 'alert',
-        label: 'alert 事件',
-        event: events.alert,
-        param: '',
-    },
-]
-
     return () => {
       if (props.lastSelectBlock && 'name' in props.lastSelectBlock.animate === false) isShowAddButton.value = true
       //属性
@@ -147,61 +109,9 @@ const eventList = [
       //事件
 	  if (props.rightActiveIndex.value == 3) {
 	    return (
-	      <div>
-	        {
-	          isShowAddButton.value && (
-	            <>
-	              <div>
-	                <ElButton
-	                  icon="Plus"
-	                  type="primary"
-	                  plain
-	                  onClick={() => {
-	                    ;(isShowAllAnimate.value = true), (isShowAddButton.value = false)
-	                  }}
-	                >
-	                  添加事件
-	                </ElButton>
-	              </div>
-	            </>
-	          )
-	        }
-	        {isShowAllAnimate.value && (
-	          <div >
-	            <p>跳转事件</p>
-				<input placeholder="请输入完整的url"></input>
-				<ElButton 
-					type="success" round
-					onClick={() => {
-					  ;(isShowAllAnimate.value = false), (isShowAddButton.value = false), (isShowAllEvent.value = true)
-					}}
-				>
-				确定
-				</ElButton>
-				
-				<p>alert事件</p>
-				<input placeholder="请输入要alert的内容"></input>
-				<ElButton 
-					type="success" round
-					onClick={() => {
-					  ;(isShowAllAnimate.value = false), (isShowAddButton.value = false), (isShowAllEvents.value = true)
-					}}
-				>
-				确定
-				</ElButton>
-	          </div>
-	        )}
-	        {isShowAllEvent.value && (
-	          <div >
-				<ElButton type="info" plain>redirect</ElButton>
-	          </div>
-	        )}
-			{isShowAllEvents.value && (
-			  <div >
-			   <ElButton type="info" plain>alert</ElButton>
-			  </div>
-			)}
-	      </div>
+        <div>
+          <EditorEvent lastSelectBlock={props.lastSelectBlock}></EditorEvent>
+        </div>
 	    )
 	  }
     }
