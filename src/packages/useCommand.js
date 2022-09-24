@@ -17,7 +17,7 @@ export function useCommand(data, focusData) {
     // 命令名字对应为执行函数
     state.commands[command.name] = (...args) => {
       const { redo, undo } = command.execute(...args)
-      redo()
+      redo() //让data.value的数据更新
       //判断是否需要放到命令队列中
       if (!command.pushQueue) {
         return

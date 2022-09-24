@@ -5,7 +5,6 @@ import '@element-plus/icons-vue'
 import EditorAnimate from './editor-animate'
 import EditorEvent from './editor-event'
 import animates from './animates.json'
-import deepcopy from 'deepcopy'
 export default defineComponent({
   props: {
     rightActiveIndex: { type: Object },
@@ -107,13 +106,13 @@ export default defineComponent({
         )
       }
       //事件
-	  if (props.rightActiveIndex.value == 3) {
-	    return (
-        <div>
-          <EditorEvent lastSelectBlock={props.lastSelectBlock}></EditorEvent>
-        </div>
-	    )
-	  }
+      if (props.rightActiveIndex.value == 3) {
+        return (
+          <div>
+            <EditorEvent lastSelectBlock={props.lastSelectBlock}></EditorEvent>
+          </div>
+        )
+      }
     }
   }
 })
